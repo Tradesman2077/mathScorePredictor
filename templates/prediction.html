@@ -1,0 +1,98 @@
+<html>
+    <head>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+        <h1 style="text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;">
+            Maths Score predictor
+        </h1>
+    </head>
+    <body>
+    <p></p>
+        <p style="text-align: center;">
+            Absences : {{session["abs"]}}
+        </p>
+        <p style="text-align: center;">
+            First term grade : {{session["sem1Input"]}}
+        </p>
+        <p style="text-align: center;">
+            Second term grade : {{session["sem2Input"]}}
+        </p>
+        <p style="text-align: center;">
+            Times failed : {{session["fails"]}}
+        </p>
+        <p style="text-align: center;">
+            Health <i>(1 = very bad,  5 = very good)</i> : {{session["health"]}}
+        </p>
+        
+        {% block content %}
+
+        {% if session["study"] == '1' %}
+            <p style="text-align: center;">Study time : Less than 2 hours</p>
+        {% elif session["study"] == '2' %}
+            <p style="text-align: center;">Study time : 2 to 5 hours</p>
+        {% elif session["study"] == '3' %}
+            <p style="text-align: center;">Study time : 5 to 10 hours</p>
+        {% elif session["study"] == '4' %}
+            <p style="text-align: center;">Study time : More than 10 hours</p>    
+        {% endif %}
+
+        {% if session["travel"] == '1' %}
+            <p style="text-align: center;">Travel time : Less than 15 minutes</p>
+        {% elif session["travel"] == '2' %}
+            <p style="text-align: center;">Travel time : 15 to 30 minutes</p>
+        {% elif session["travel"] == '3' %}
+            <p style="text-align: center;">Travel time : 30 minutes to 1 hour</p>
+        {% elif session["travel"] == '4' %}
+            <p style="text-align: center;">Travel time : More than 1 hour</p>  
+        {% endif %}
+
+
+        {% if session["mEd"] == 0 %}
+            <p style="text-align: center;">Mothers Education : None</p>
+        {% elif session["mEd"] == 1 %}
+            <p style="text-align: center;">Mothers Education: Primary</p>
+        {% elif session["mEd"] == 2 %}
+            <p style="text-align: center;">Mothers Education : 5th To 9th</p>
+        {% elif session["mEd"] == 3 %}
+            <p style="text-align: center;">Mothers Education : Secondary</p>
+        {% elif session["mEd"] == 4 %}
+            <p style="text-align: center;">Mothers Education : Higher education</p>
+        {% endif %}
+
+        {% if session["fEd"] == 0 %}
+            <p style="text-align: center;">Fathers Education : None</p>
+        {% elif session["fEd"] == 1 %}
+            <p style="text-align: center;">Fathers Education: Primary</p>
+        {% elif session["fEd"] == 2 %}
+            <p style="text-align: center;">Fathers Education : 5th To 9th</p>
+        {% elif session["fEd"] == 3 %}
+            <p style="text-align: center;">Fathers Education : Secondary</p>
+        {% elif session["fEd"] == 4 %}
+            <p style="text-align: center;">Fathers Education : Higher education</p>
+        {% endif %}
+ 
+
+        {% if session["famSup"] == 0 %}
+            <p style="text-align: center;">Family Support : No</p>
+        {% else %}
+            <p style="text-align: center;">Family Support : Yes</p>
+        {% endif %}
+
+        {% if session["prediction"] > 40 %}
+            <h2 style="text-align: center; ">
+                Predicted score : <em style="color: rgb(63, 206, 20);">{{session["prediction"]}} %</em>
+            </h2>
+        {% else %}
+            <h2 style="text-align: center; ">
+                Predicted score : <em style="color: rgb(205, 50, 50);">{{session["prediction"]}} %</em>
+            </h2>
+        {% endif %}
+
+        {% endblock content %}
+        <p style="text-align: center;">Remember this is just an estimate based on your data</p>
+    </body>
+
+
+</html>        
